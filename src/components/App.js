@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import video from "../data/video.js";
 
 function App() {
@@ -8,7 +8,8 @@ function App() {
     upvotes: video.upvotes,
     downvotes: video.downvotes,
   });
-  // console.log(votes);
+  const [showComment, setShowComment] = useState(false);
+  // const [loading, isLoading] = useState(false);
 
   function handleUpVotes() {
     setVotes({ upvotes: votes.upvotes + 1, downvotes: video.downvotes });
@@ -17,6 +18,22 @@ function App() {
   function handleDownVotes() {
     setVotes({ upvotes: votes.upvotes, downvotes: votes.downvotes - 1 });
   }
+
+  function handleComments () {
+    setShowComment(!showComment);
+  }
+
+  // let comment;
+  // function handleCommentsButton() {
+  //   showComment ? comment="Hide Comments" : comment="Show Comments"
+  // }
+
+//   useEffect(()=> {
+//     const timer = setTimeout(()=> {
+//       setShowComment(showComment);
+//     }, 1000);
+//     return ()=> clearTimeout(timer);
+//  }, [showComment])
 
   return (
     <div className="App">
@@ -35,7 +52,7 @@ function App() {
       <button onClick={handleUpVotes}>{votes.upvotes} 👍</button>
       <button onClick={handleDownVotes}>{votes.downvotes} 👎</button>
       <div>
-        <button>Hide Comments</button>
+        <button onClick={handleComments}>{showComment ? "Hide Comments" : "Show Comments"}</button>
       </div>
     </div>
   );
